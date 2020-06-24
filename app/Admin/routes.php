@@ -13,10 +13,23 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('home');
 
+    $router->resource('banners', 'BannerController');
+
+    $router->resource('teams', 'TeamController');
+
+    $router->resource('principles', 'PrincipleController');
+
+    $router->resource('missions', 'MissionController');
+
+    $router->resource('businesses', 'BusinessController');
+
+    $router->resource('contacts', 'ContactController');
+
     $router->resource('configs', 'ConfigController');
 
     $router->resource('articles', 'ArticleController');
 
     $router->resource('categories', 'CategoryController');
 
+    $router->resource('users', 'UserController');
 });

@@ -17,4 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//联系我们
+Route::post('/contact', 'ApiController@contact');
 
+//发送邮件
+Route::post('/email_code', 'ApiController@email_code');

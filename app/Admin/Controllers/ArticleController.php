@@ -34,7 +34,7 @@ class ArticleController extends AdminController
         $grid = new Grid(new Article());
 
         $grid->column('id', __('Id'));
-        $grid->column('category.name', __('Category id'))->link(route('admin.categories.index'));
+        $grid->column('category.name_cn', __('Category id'))->link(route('admin.categories.index'));
         $grid->column('image', __('Image'))->image();
         $grid->column('title', __('Title'));
         $grid->column('author', __('Author'));

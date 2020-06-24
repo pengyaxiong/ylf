@@ -35,7 +35,7 @@ class CategoryController extends AdminController
         $grid = new Grid(new Category());
 
         $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'))->modal(function ($model) {
+        $grid->column('name_cn', __('Name cn'))->modal(function ($model) {
 
             $articles = $model->articles()->take(10)->get()->map(function ($article) {
                 return $article->only(['id', 'title', 'description']);
@@ -51,6 +51,7 @@ class CategoryController extends AdminController
             }
             return new Table(['ID', '内容', '简介', '操作'], $array);
         });
+        $grid->column('name_en', __('Name en'));
         $grid->column('sort_order', __('Sort order'))->sortable()->editable()->help('按数字大小正序排序');
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
@@ -69,7 +70,8 @@ class CategoryController extends AdminController
         $show = new Show(Category::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
+        $show->field('name_cn', __('Name cn'));
+        $show->field('name_en', __('Name en'));
         $show->field('sort_order', __('Sort order'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -86,7 +88,8 @@ class CategoryController extends AdminController
     {
         $form = new Form(new Category());
 
-        $form->text('name', __('Name'));
+        $form->text('name_cn', __('Name cn'));
+        $form->text('name_en', __('Name en'));
         $form->number('sort_order', __('Sort order'))->default(99);
 
         return $form;
