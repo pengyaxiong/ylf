@@ -22,3 +22,6 @@ Route::post('/contact', 'ApiController@contact');
 
 //发送邮件
 Route::post('/email_code', 'ApiController@email_code');
+
+//切换语言
+Route::post('/language', 'ApiController@language');
