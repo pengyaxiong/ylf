@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+
 class ContentController extends Controller
 {
     private $language;
+
     /**
      * Create a new controller instance.
      *
@@ -17,7 +20,7 @@ class ContentController extends Controller
         $lan = Cookie::get('language', 'cn');
         $this->language = $lan == 'cn' ? 1 : 0;
         view()->share([
-            'lan'=> $this->language
+            'lan' => $this->language
         ]);
     }
 
@@ -31,8 +34,19 @@ class ContentController extends Controller
         return view('content');
     }
 
-    public function content_detail()
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function content_detail($id)
     {
-        return view('content_detail');
+        $article = Article::find($id);
+        if ($article->is_login) {
+            if (!auth()->user()) {
+                return redirect(route('login'));
+            }
+        }
+        return $article;
+        view('content_detail');
     }
 }

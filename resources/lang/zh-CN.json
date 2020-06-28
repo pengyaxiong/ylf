@@ -54,6 +54,7 @@
 
   "Name cn": "中文名",
   "Name en": "英文名",
+  "Is login": "会员可见",
 
   "Admin": "管理员配置",
   "Users": "管理员",

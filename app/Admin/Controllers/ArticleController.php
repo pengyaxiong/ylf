@@ -41,6 +41,11 @@ class ArticleController extends AdminController
         $grid->column('time', __('Time'));
         $grid->column('contact', __('Contact'))->hide();
         $grid->column('description', __('Description'))->hide();
+        $states = [
+            'on'  => ['value' => 1, 'text' => 'is_login', 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => 'no_login', 'color' => 'danger'],
+        ];
+        $grid->column('is_login', __('Is login'))->switch($states);
         $grid->column('sort_order', __('Sort order'))->sortable()->editable()->help('按数字大小正序排序');
         $grid->column('created_at', __('Created at'))->hide();
         $grid->column('updated_at', __('Updated at'))->hide();
@@ -78,6 +83,7 @@ class ArticleController extends AdminController
         $show->field('time', __('Time'));
         $show->field('contact', __('Contact'));
         $show->field('description', __('Description'));
+        $show->field('is_login', __('Is login'));
         $show->field('sort_order', __('Sort order'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -105,6 +111,11 @@ class ArticleController extends AdminController
         $form->datetime('time', __('Time'))->default(date('Y-m-d H:i:s'));
         $form->textarea('description', __('Description'))->rules('required');
         $form->ueditor('contact', __('Contact'));
+        $states = [
+            'on' => ['value' => 1, 'text' => 'is_login', 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => 'no_login', 'color' => 'danger'],
+        ];
+        $form->switch('is_login', __('Is login'))->states($states)->default(1);
         $form->number('sort_order', __('Sort order'))->default(99);
 
         return $form;

@@ -21,5 +21,6 @@ Route::get('/team', 'TeamController@index')->name('team');
 Route::get('/contact', 'ContactController@index')->name('contact');
 
 Route::get('/content', 'ContentController@index')->name('contact');
-Route::get('/content_detail', 'ContentController@content_detail')->name('content_detail');
+
+Route::get('/content_detail/{id}', 'ContentController@content_detail')->name('content_detail');
 
