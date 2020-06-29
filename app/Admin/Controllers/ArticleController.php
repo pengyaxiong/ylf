@@ -46,6 +46,11 @@ class ArticleController extends AdminController
             'off' => ['value' => 0, 'text' => 'no_login', 'color' => 'danger'],
         ];
         $grid->column('is_login', __('Is login'))->switch($states);
+        $states = [
+            'on'  => ['value' => 1, 'text' => 'cn', 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => 'en', 'color' => 'danger'],
+        ];
+        $grid->column('language', __('Language'))->switch($states);
         $grid->column('sort_order', __('Sort order'))->sortable()->editable()->help('按数字大小正序排序');
         $grid->column('created_at', __('Created at'))->hide();
         $grid->column('updated_at', __('Updated at'))->hide();
@@ -54,7 +59,7 @@ class ArticleController extends AdminController
             $filter->like('title', __('Title'));
 
             $categories = Category::all()->toArray();
-            $select_array = array_column($categories, 'name', 'id');
+            $select_array = array_column($categories, 'name_cn', 'id');
 
             $filter->equal('category_id', __('Category id'))->select($select_array);
 
@@ -84,6 +89,7 @@ class ArticleController extends AdminController
         $show->field('contact', __('Contact'));
         $show->field('description', __('Description'));
         $show->field('is_login', __('Is login'));
+        $show->field('language', __('Language'));
         $show->field('sort_order', __('Sort order'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -101,7 +107,7 @@ class ArticleController extends AdminController
         $form = new Form(new Article());
 
         $categories = Category::all()->toArray();
-        $select_array = array_column($categories, 'name', 'id');
+        $select_array = array_column($categories, 'name_cn', 'id');
         //创建select
         $form->select('category_id', '分类')->options($select_array);
 
@@ -116,6 +122,11 @@ class ArticleController extends AdminController
             'off' => ['value' => 0, 'text' => 'no_login', 'color' => 'danger'],
         ];
         $form->switch('is_login', __('Is login'))->states($states)->default(1);
+        $states = [
+            'on' => ['value' => 1, 'text' => 'cn', 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => 'en', 'color' => 'danger'],
+        ];
+        $form->switch('language', __('Language'))->states($states)->default(1);
         $form->number('sort_order', __('Sort order'))->default(99);
 
         return $form;

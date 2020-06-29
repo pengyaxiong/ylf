@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ class ApiController extends Controller
                 'email.required' => '邮箱不能为空!',
             ];
             $rules = [
-                'phone' => 'required',
+                'name' => 'required',
                 'email' => 'required',
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
@@ -50,7 +51,7 @@ class ApiController extends Controller
             return ['status' => 0, 'msg' => $exception->getMessage()];
         }
 
-        return $this->null();
+        return ['status' => 1, 'msg' => '提交成功'];
     }
 
     /**
@@ -83,11 +84,10 @@ class ApiController extends Controller
     {
         $language=$request->language;
 
-        setcookie('language', $language, 24*60*60, '/');
+        $languageCookie = Cookie::forever('language',$language);
 
-        //  Cookie::queue('language', 'cn', 24*60);
+        return Response::make()->withCookie($languageCookie);
 
-        return ['status' => 1, 'msg' => '切换'];
 
     }
 }

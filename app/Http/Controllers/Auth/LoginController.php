@@ -7,7 +7,8 @@ use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Config;
+use Illuminate\Support\Facades\Cookie;
 class LoginController extends Controller
 {
     /*
@@ -38,6 +39,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $lan = Cookie::get('language', 'cn');
+        $this->language = $lan == 'cn' ? 1 : 0;
+        $config=Config::first();
+        view()->share([
+            'lan'=> $this->language,
+            'config'=> $config,
+            '_login'=> 'header-register',
+        ]);
     }
 
     protected function validateLogin(Request $request)

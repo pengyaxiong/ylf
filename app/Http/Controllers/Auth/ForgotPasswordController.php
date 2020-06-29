@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-
+use App\Models\Config;
+use Illuminate\Support\Facades\Cookie;
 class ForgotPasswordController extends Controller
 {
     /*
@@ -28,5 +29,12 @@ class ForgotPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $lan = Cookie::get('language', 'cn');
+        $this->language = $lan == 'cn' ? 1 : 0;
+        $config=Config::first();
+        view()->share([
+            'lan'=> $this->language,
+            'config'=> $config,
+        ]);
     }
 }

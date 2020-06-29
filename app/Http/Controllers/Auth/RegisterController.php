@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Cache;
-
+use App\Models\Config;
+use Illuminate\Support\Facades\Cookie;
 class RegisterController extends Controller
 {
     /*
@@ -39,6 +40,14 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $lan = Cookie::get('language', 'cn');
+        $this->language = $lan == 'cn' ? 1 : 0;
+        $config=Config::first();
+        view()->share([
+            'lan'=> $this->language,
+            'config'=> $config,
+            '_register'=> 'header-register',
+        ]);
     }
 
     /**

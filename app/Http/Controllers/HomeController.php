@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Article;
+use App\Models\Config;
 use App\Models\Banner;
 use App\Models\Business;
 use App\Models\Mission;
@@ -23,9 +24,11 @@ class HomeController extends Controller
 //        $this->middleware('auth');
         $lan = Cookie::get('language', 'cn');
         $this->language = $lan == 'cn' ? 1 : 0;
-
+        $config=Config::first();
         view()->share([
-           'lan'=> $this->language
+           'lan'=> $this->language,
+           '_index'=> 'on',
+            'config'=> $config,
         ]);
     }
 
@@ -40,7 +43,8 @@ class HomeController extends Controller
         $mission = Mission::where('language', $this->language)->orderby('sort_order')->first();
         $principle = Principle::where('language', $this->language)->orderby('sort_order')->first();
         $business = Business::where('language', $this->language)->orderby('sort_order')->limit(2)->get();
+        $articles = Article::where('language', $this->language)->where('is_login', 1)->orderby('sort_order')->limit(2)->get();
 
-        return view('home', compact('banners'));
+        return view('home', compact('banners','mission','principle','business','articles'));
     }
 }

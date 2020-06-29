@@ -33,8 +33,10 @@ class ConfigController extends AdminController
         $grid = new Grid(new Config());
 
         $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('address', __('Address'));
+        $grid->column('name_cn', __('Name cn'));
+        $grid->column('name_en', __('Name en'));
+        $grid->column('address_cn', __('Address cn'));
+        $grid->column('address_en', __('Address en'));
         $grid->column('email', __('Email'));
         $grid->column('tel', __('Tel'));
         $grid->column('copyright', __('Copyright'));
@@ -72,8 +74,10 @@ class ConfigController extends AdminController
         $show = new Show(Config::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
-        $show->field('address', __('Address'));
+        $show->field('name_cn', __('Name cn'));
+        $show->field('name_en', __('Name en'));
+        $show->field('address_cn', __('Address cn'));
+        $show->field('address_en', __('Address en'));
         $show->field('email', __('Email'));
         $show->field('tel', __('Tel'));
         $show->field('copyright', __('Copyright'));
@@ -93,8 +97,10 @@ class ConfigController extends AdminController
     {
         $form = new Form(new Config());
 
-        $form->text('name', __('Name'));
-        $form->text('address', __('Address'));
+        $form->text('name_cn', __('Name cn'));
+        $form->text('name_en', __('Name en'));
+        $form->text('address_cn', __('Address cn'));
+        $form->text('address_en', __('Address en'));
         $form->email('email', __('Email'));
         $form->text('tel', __('Tel'));
         $form->textarea('copyright', __('Copyright'));

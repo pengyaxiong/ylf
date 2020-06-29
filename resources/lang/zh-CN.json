@@ -53,6 +53,8 @@
   "Business": "业务",
 
   "Name cn": "中文名",
+  "Address cn": "中文地址",
+  "Address en": "英文地址",
   "Name en": "英文名",
   "Is login": "会员可见",
 

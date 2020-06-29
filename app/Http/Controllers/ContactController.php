@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 class ContactController extends Controller
@@ -16,8 +17,11 @@ class ContactController extends Controller
     {
         $lan = Cookie::get('language', 'cn');
         $this->language = $lan == 'cn' ? 1 : 0;
+        $config=Config::first();
         view()->share([
-            'lan'=> $this->language
+            'lan'=> $this->language,
+            '_contact'=> 'on',
+            'config'=> $config,
         ]);
     }
 

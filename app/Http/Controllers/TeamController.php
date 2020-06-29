@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Config;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -17,8 +17,11 @@ class TeamController extends Controller
     {
         $lan = Cookie::get('language', 'cn');
         $this->language = $lan == 'cn' ? 1 : 0;
+        $config=Config::first();
         view()->share([
-            'lan'=> $this->language
+            'lan'=> $this->language,
+            '_team'=> 'on',
+            'config'=> $config,
         ]);
     }
 
@@ -30,8 +33,8 @@ class TeamController extends Controller
     public function index()
     {
 
-        $teams = Team::orderby('sort_order')->paginate(env(3));
+        $teams = Team::where('language', $this->language)->orderby('sort_order')->paginate(3);
 
-        return  view('team',compact('teams'));
+        return view('team',compact('teams'));
     }
 }
