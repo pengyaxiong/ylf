@@ -42,13 +42,18 @@ class ArticleController extends AdminController
         $grid->column('contact', __('Contact'))->hide();
         $grid->column('description', __('Description'))->hide();
         $states = [
-            'on'  => ['value' => 1, 'text' => 'is_login', 'color' => 'success'],
-            'off' => ['value' => 0, 'text' => 'no_login', 'color' => 'danger'],
+            'on'  => ['value' => 1, 'text' => __('Is login'), 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => __('No login'), 'color' => 'danger'],
         ];
         $grid->column('is_login', __('Is login'))->switch($states);
         $states = [
-            'on'  => ['value' => 1, 'text' => 'cn', 'color' => 'success'],
-            'off' => ['value' => 0, 'text' => 'en', 'color' => 'danger'],
+            'on'  => ['value' => 1, 'text' => __('Advanced'), 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => __('General'), 'color' => 'danger'],
+        ];
+        $grid->column('grade', __('Grade'))->switch($states);
+        $states = [
+            'on'  => ['value' => 1, 'text' => __('Cn'), 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => __('En'), 'color' => 'danger'],
         ];
         $grid->column('language', __('Language'))->switch($states);
         $grid->column('sort_order', __('Sort order'))->sortable()->editable()->help('按数字大小正序排序');
@@ -89,6 +94,7 @@ class ArticleController extends AdminController
         $show->field('contact', __('Contact'));
         $show->field('description', __('Description'));
         $show->field('is_login', __('Is login'));
+        $show->field('grade', __('Grade'));
         $show->field('language', __('Language'));
         $show->field('sort_order', __('Sort order'));
         $show->field('created_at', __('Created at'));
@@ -118,13 +124,19 @@ class ArticleController extends AdminController
         $form->textarea('description', __('Description'))->rules('required');
         $form->ueditor('contact', __('Contact'));
         $states = [
-            'on' => ['value' => 1, 'text' => 'is_login', 'color' => 'success'],
-            'off' => ['value' => 0, 'text' => 'no_login', 'color' => 'danger'],
+            'on'  => ['value' => 1, 'text' => __('Is login'), 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => __('No login'), 'color' => 'danger'],
         ];
         $form->switch('is_login', __('Is login'))->states($states)->default(1);
+
         $states = [
-            'on' => ['value' => 1, 'text' => 'cn', 'color' => 'success'],
-            'off' => ['value' => 0, 'text' => 'en', 'color' => 'danger'],
+            'on'  => ['value' => 1, 'text' => __('Advanced'), 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => __('General'), 'color' => 'danger'],
+        ];
+        $form->switch('grade', __('Grade'))->states($states)->default(1);
+        $states = [
+            'on'  => ['value' => 1, 'text' => __('Cn'), 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => __('En'), 'color' => 'danger'],
         ];
         $form->switch('language', __('Language'))->states($states)->default(1);
         $form->number('sort_order', __('Sort order'))->default(99);

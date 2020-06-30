@@ -1,5 +1,12 @@
 @extends('layouts.app')
-
+<style>
+    .index-mission-con>p{
+        height: 130px;
+    }
+    .index-content-desc{
+        height: 99px;
+    }
+</style>
 @section('content')
     <div class="index-body">
         <div class="index-swiper d-minWidth swiper-container">

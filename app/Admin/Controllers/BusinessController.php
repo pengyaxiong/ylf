@@ -31,8 +31,8 @@ class BusinessController extends AdminController
         $grid->column('image', __('Image'))->image();
         $grid->column('description', __('Description'));
         $states = [
-            'on'  => ['value' => 1, 'text' => 'cn', 'color' => 'success'],
-            'off' => ['value' => 0, 'text' => 'en', 'color' => 'danger'],
+            'on'  => ['value' => 1, 'text' => __('Cn'), 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => __('En'), 'color' => 'danger'],
         ];
         $grid->column('language', __('Language'))->switch($states);
         $grid->column('sort_order', __('Sort order'))->sortable()->editable()->help('按数字大小正序排序');
@@ -77,8 +77,8 @@ class BusinessController extends AdminController
         $form->image('image', __('Image'))->rules('required|image');
         $form->textarea('description', __('Description'))->rules('required');
         $states = [
-            'on' => ['value' => 1, 'text' => 'cn', 'color' => 'success'],
-            'off' => ['value' => 0, 'text' => 'en', 'color' => 'danger'],
+            'on'  => ['value' => 1, 'text' => __('Cn'), 'color' => 'success'],
+            'off' => ['value' => 0, 'text' => __('En'), 'color' => 'danger'],
         ];
         $form->switch('language', __('Language'))->states($states)->default(1);
         $form->number('sort_order', __('Sort order'))->default(99);

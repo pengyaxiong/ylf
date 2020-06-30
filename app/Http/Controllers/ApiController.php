@@ -31,10 +31,16 @@ class ApiController extends Controller
             $messages = [
                 'name.required' => '姓名不能为空!',
                 'email.required' => '邮箱不能为空!',
+                'city.required' => '地址不能为空!',
+                'subject.required' => '问题不能为空!',
+                'message.required' => '信息不能为空!',
             ];
             $rules = [
                 'name' => 'required',
                 'email' => 'required',
+                'city' => 'required',
+                'subject' => 'required',
+                'message' => 'required',
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             if ($validator->fails()) {

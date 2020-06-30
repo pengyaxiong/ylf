@@ -69,6 +69,11 @@ class ContentController extends Controller
         if ($article->is_login) {
             if (!auth()->user()) {
                 return redirect(route('login'));
+            }else{
+                $user_grade=auth()->user()->grade;
+                if ($article->grade>$user_grade){
+                    return response()->view('error.403');
+                }
             }
         }
         return view('content_detail',compact('article','category'));
