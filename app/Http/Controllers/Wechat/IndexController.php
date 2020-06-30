@@ -14,7 +14,9 @@ use App\Models\Team;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -119,7 +121,7 @@ class IndexController extends Controller
             if ($request->has('category_id')) {
 
                 $categories = Category::orderby('sort_order')->get();
-                $category_id=$request->category_id?$request->category_id:$categories->first()->id;
+                $category_id = $request->category_id ? $request->category_id : $categories->first()->id;
                 $query->where('category_id', $category_id);
             }
             if ($request->has('keyword')) {
@@ -139,20 +141,20 @@ class IndexController extends Controller
             'title' => $request->keyword,
         ));
 
-        return $this->array(['articles' => $articles,'categories' => $categories]);
+        return $this->array(['articles' => $articles, 'categories' => $categories]);
     }
 
     public function content_detail(Request $request, $id)
     {
         $article = Article::find($id);
-        $openid = $request->openid;
+        $id = $request->id;
         if ($article->is_login) {
 
-            if (!$openid) {
+            if (!$id) {
                 return ['code' => 500, 'message' => '登录后查看'];
-            }else{
-                $user=User::where('openid',$openid)->find();
-                if ($article->grade>$user->grade){
+            } else {
+                $user = User::where('id', $id)->find();
+                if ($article->grade > $user->grade) {
                     return ['code' => 500, 'message' => '您的权限不够'];
                 }
             }
@@ -213,13 +215,13 @@ class IndexController extends Controller
         $type = $request->type;
 
         $user_info = User::where(array('email' => $email))->exists();
-        if ($type=='password'){
+        if ($type == 'password') {
             if (!$user_info) {
                 return ['code' => 500, 'message' => '未找到该邮箱用户'];
             }
-        }else{
+        } else {
             if ($user_info) {
-                return ['code' => 500, 'message' => '该手机号已经注册过'];
+                return ['code' => 500, 'message' => '该手邮箱已经注册过'];
             }
         }
 
@@ -234,5 +236,79 @@ class IndexController extends Controller
         });
 
         return ['code' => 200, 'message' => '发送成功'];
+    }
+
+    public function login(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+
+            $user = Auth::user();
+
+            return ['code' => 200, 'message' => '登陆成功','data'=>$user];
+
+        } else {
+            return ['code' => 500, 'message' => '账号密码错误'];
+        }
+    }
+
+    public function register(Request $request)
+    {
+        $email = $request->email;
+        $code = $request->code;
+        $password = $request->password;
+
+        $code_ = Cache::get($email);
+
+        if ($code_ != $code) {
+            return ['code' => 500, 'message' => '验证码错误'];
+        }
+
+        if (!$password) {
+            return ['code' => 500, 'message' => '密码不能为空'];
+        }
+
+
+        $user_info = User::where(array('email' => $email))->exists();
+        if ($user_info) {
+            return ['code' => 500, 'message' => '该邮箱已经注册'];
+        }
+
+        User::create([
+            'email' => $email,
+            'password' => Hash::make($password),
+        ]);
+
+        return ['code' => 200, 'message' => '注册成功'];
+    }
+
+    public function reset_password(Request $request)
+    {
+        $email = $request->email;
+        $code = $request->code;
+        $password = $request->password;
+
+        $code_ = Cache::get($email);
+
+        if ($code_ != $code) {
+            return ['code' => 500, 'message' => '验证码错误'];
+        }
+
+        if (!$password) {
+            return ['code' => 500, 'message' => '密码不能为空'];
+        }
+
+
+        $user_info = User::where(array('email' => $email))->exists();
+        if (!$user_info) {
+            return ['code' => 500, 'message' => '未找到该邮箱用户'];
+        }
+
+        User::where(array('email' => $email))->update([
+            'password' => Hash::make($password)
+        ]);
+        return ['code' => 200, 'message' => '修改成功'];
     }
 }

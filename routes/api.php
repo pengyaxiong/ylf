@@ -47,5 +47,5 @@ Route::group(['namespace' => 'Wechat', 'prefix' => 'wechat', 'as' => 'wechat.'],
     //注册
     Route::post('/register', 'IndexController@register');
     //修改密码
-    Route::post('/password', 'IndexController@password');
+    Route::post('/reset_password', 'IndexController@reset_password');
 });

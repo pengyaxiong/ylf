@@ -76,7 +76,7 @@ class ApiController extends Controller
             }
         }else{
             if ($user_info) {
-                return ['code' => 500, 'message' => '该手机号已经注册过'];
+                return ['code' => 500, 'message' => '该邮箱已经注册过'];
             }
         }
 
