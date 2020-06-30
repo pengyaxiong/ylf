@@ -24,3 +24,5 @@ Route::get('/content', 'ContentController@index')->name('content');
 
 Route::get('/content_detail/{id}', 'ContentController@content_detail')->name('content_detail');
 
+Route::get('/password', 'HomeController@password')->name('password');
+Route::post('/reset_password', 'HomeController@reset_password')->name('reset_password');

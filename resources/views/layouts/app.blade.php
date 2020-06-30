@@ -68,11 +68,11 @@
                 <div id="hasLogin" class="header-login d-middle">
                     <img class="header-login-icon d-middle-item" src="/home/images/icon-user-s.png" alt=""/>
                     <div class="header-login-slide">
-                        <p><a href="">Password{{ Auth::user()->email }}</a></p>
-                        <p><a href="">Wechat</a></p>
+                        <p><a href="/password">{{$lan==1?'修改密码':'Password'}}</a></p>
+                        <p><a href="">{{$lan==1?'微信登录':'Wechat'}}</a></p>
                         <p><a id="logout" href="{{ route('logout') }}"
                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">{{$lan==1?'注销':'Sign out'}}</a>
+                                                     document.getElementById('logout-form').submit();">{{$lan==1?'退出登录':'Sign out'}}</a>
                         </p>
                     </div>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST"

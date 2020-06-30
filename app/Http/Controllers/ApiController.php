@@ -67,11 +67,19 @@ class ApiController extends Controller
     public function email_code(Request $request)
     {
         $email = $request->email;
+        $type = $request->type;
 
         $user_info = User::where(array('email' => $email))->exists();
-        if ($user_info) {
-            return ['status' => 0, 'msg' => '该手机号已经注册过'];
+        if ($type=='password'){
+            if (!$user_info) {
+                return ['code' => 500, 'message' => '未找到该邮箱用户'];
+            }
+        }else{
+            if ($user_info) {
+                return ['code' => 500, 'message' => '该手机号已经注册过'];
+            }
         }
+
         $num = rand(1000, 9999);
 
         $minutes = 24 * 60;
