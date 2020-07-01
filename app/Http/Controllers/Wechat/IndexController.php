@@ -153,7 +153,7 @@ class IndexController extends Controller
             if (!$id) {
                 return ['code' => 500, 'message' => '登录后查看'];
             } else {
-                $user = User::where('id', $id)->find();
+                $user = User::find($id);
                 if ($article->grade > $user->grade) {
                     return ['code' => 500, 'message' => '您的权限不够'];
                 }
@@ -221,7 +221,7 @@ class IndexController extends Controller
             }
         } else {
             if ($user_info) {
-                return ['code' => 500, 'message' => '该手邮箱已经注册过'];
+                return ['code' => 500, 'message' => '该邮箱已经注册过'];
             }
         }
 
