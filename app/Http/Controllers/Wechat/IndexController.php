@@ -228,6 +228,7 @@ class IndexController extends Controller
         $num = rand(1000, 9999);
 
         $minutes = 24 * 60;
+
         Cache::store('database')->put($email, $num, $minutes);
 
         Mail::send('auth.send_mail', ['user' => $email, 'info' => $num], function ($message) use ($email) {
@@ -261,7 +262,7 @@ class IndexController extends Controller
         $password = $request->password;
 
         $code_ = Cache::get($email);
-
+return $code_;
         if ($code_ != $code) {
             return ['code' => 500, 'message' => '验证码错误'];
         }
