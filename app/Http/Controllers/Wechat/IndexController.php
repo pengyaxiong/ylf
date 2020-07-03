@@ -134,6 +134,13 @@ class IndexController extends Controller
 
         $categories = Category::orderby('sort_order')->get();
 
+        foreach ($categories as $key=>$category){
+            if ($request->language==1){
+                $categories[$key]['name']=$category['name_cn'];
+            }else{
+                $categories[$key]['name']=$category['name_en'];
+            }
+        }
         $page = isset($page) ? $request['page'] : 1;
         $articles = $articles->appends(array(
             'page' => $page,
@@ -146,16 +153,24 @@ class IndexController extends Controller
 
     public function content_detail(Request $request, $id)
     {
+        if ($request->language==1){
+            $login_error='登录后查看!';
+            $pre_error='You donot have enough permissions!';
+        }else{
+            $login_error='After logging in to see!';
+            $pre_error='The email cannot be empty!';
+        }
+
         $article = Article::find($id);
         $id = $request->id;
         if ($article->is_login) {
 
             if (!$id) {
-                return ['code' => 500, 'message' => '登录后查看'];
+                return ['code' => 500, 'message' => $login_error];
             } else {
                 $user = User::find($id);
                 if ($article->grade > $user->grade) {
-                    return ['code' => 500, 'message' => '您的权限不够'];
+                    return ['code' => 500, 'message' => $pre_error];
                 }
             }
         }
@@ -165,10 +180,16 @@ class IndexController extends Controller
     public function user(Request $request)
     {
 
+        if ($request->language==1){
+            $login_error='登录后查看!';
+        }else{
+            $login_error='After logging in to see!';
+        }
+
         $id = $request->id;
         $user = User::find($id);
         if (!$user) {
-            return ['code' => 500, 'message' => '登录后查看'];
+            return ['code' => 500, 'message' => $login_error];
         }
 
         return $this->array(['user' => $user]);
@@ -176,13 +197,26 @@ class IndexController extends Controller
 
     public function contact(Request $request)
     {
+        if ($request->language==1){
+            $name_error='姓名不能为空!';
+            $email_error='邮箱不能为空!';
+            $city_error='地址不能为空!';
+            $subject_error='问题不能为空!';
+            $message_error='信息不能为空!';
+        }else{
+            $name_error='The name cannot be empty!';
+            $email_error='The email cannot be empty!';
+            $city_error='The city cannot be empty!';
+            $subject_error='The subject cannot be empty!';
+            $message_error='The message cannot be empty!';
+        }
         try {
             $messages = [
-                'name.required' => '姓名不能为空!',
-                'email.required' => '邮箱不能为空!',
-                'city.required' => '地址不能为空!',
-                'subject.required' => '问题不能为空!',
-                'message.required' => '信息不能为空!',
+                'name.required' => $name_error,
+                'email.required' => $email_error,
+                'city.required' => $city_error,
+                'subject.required' => $subject_error,
+                'message.required' => $message_error,
             ];
             $rules = [
                 'name' => 'required',
@@ -197,7 +231,12 @@ class IndexController extends Controller
 
                 return ['code' => 500, 'message' => $error];
             }
-            Contact::create($request->all());
+            Contact::create([
+                'name' =>$request->name,
+                'email' =>$request->email,
+                'city' =>$request->city,
+                'message' =>$request->message,
+            ]);
 
         } catch (\Exception $exception) {
 
@@ -211,17 +250,25 @@ class IndexController extends Controller
 
     public function email_code(Request $request)
     {
+        if ($request->language==1){
+            $no_error='未找到该邮箱用户!';
+            $have_error='该邮箱已经注册过!';
+        }else{
+            $no_error='Not found the mail users!';
+            $have_error='This email has been registered!';
+        }
+
         $email = $request->email;
         $type = $request->type;
 
         $user_info = User::where(array('email' => $email))->exists();
         if ($type == 'password') {
             if (!$user_info) {
-                return ['code' => 500, 'message' => '未找到该邮箱用户'];
+                return ['code' => 500, 'message' => $no_error];
             }
         } else {
             if ($user_info) {
-                return ['code' => 500, 'message' => '该邮箱已经注册过'];
+                return ['code' => 500, 'message' => $have_error];
             }
         }
 
@@ -242,6 +289,14 @@ class IndexController extends Controller
 
     public function login(Request $request)
     {
+        if ($request->language==1){
+            $login_success='登录成功!';
+            $login_error='账号密码错误!';
+        }else{
+            $login_success='Success!';
+            $login_error='Password is wrong!';
+        }
+
         $email = $request->email;
         $password = $request->password;
 
@@ -249,15 +304,28 @@ class IndexController extends Controller
 
             $user = Auth::user();
 
-            return ['code' => 200, 'message' => '登陆成功','data'=>$user];
+            return ['code' => 200, 'message' => $login_success,'data'=>$user];
 
         } else {
-            return ['code' => 500, 'message' => '账号密码错误'];
+            return ['code' => 500, 'message' =>$login_error];
         }
     }
 
     public function register(Request $request)
     {
+        if ($request->language==1){
+            $code_error='验证码错误!';
+            $password_error='密码不能为空!';
+            $email_error='该邮箱已经注册!';
+            $login_error='注册成功!';
+        }else{
+            $code_error='Verification code error!';
+            $password_error='Password is wrong!';
+            $email_error='This email has been registered!';
+            $login_error='Success!';
+        }
+
+
         $email = $request->email;
         $code = $request->code;
         $password = $request->password;
@@ -265,17 +333,17 @@ class IndexController extends Controller
         $code_ = Cache::get($email);
 
         if ($code_ != $code) {
-            return ['code' => 500, 'message' => '验证码错误'];
+            return ['code' => 500, 'message' => $code_error];
         }
 
         if (!$password) {
-            return ['code' => 500, 'message' => '密码不能为空'];
+            return ['code' => 500, 'message' => $password_error];
         }
 
 
         $user_info = User::where(array('email' => $email))->exists();
         if ($user_info) {
-            return ['code' => 500, 'message' => '该邮箱已经注册'];
+            return ['code' => 500, 'message' => $email_error];
         }
 
         User::create([
@@ -283,11 +351,23 @@ class IndexController extends Controller
             'password' => Hash::make($password),
         ]);
 
-        return ['code' => 200, 'message' => '注册成功'];
+        return ['code' => 200, 'message' => $login_error];
     }
 
     public function reset_password(Request $request)
     {
+        if ($request->language==1){
+            $code_error='验证码错误!';
+            $password_error='密码不能为空!';
+            $email_error='未找到该邮箱用户!';
+            $login_error='修改成功!';
+        }else{
+            $code_error='Verification code error!';
+            $password_error='Password is wrong!';
+            $email_error='Not found the mail users!';
+            $login_error='Success!';
+        }
+
         $email = $request->email;
         $code = $request->code;
         $password = $request->password;
@@ -295,22 +375,22 @@ class IndexController extends Controller
         $code_ = Cache::get($email);
 
         if ($code_ != $code) {
-            return ['code' => 500, 'message' => '验证码错误'];
+            return ['code' => 500, 'message' => $code_error];
         }
 
         if (!$password) {
-            return ['code' => 500, 'message' => '密码不能为空'];
+            return ['code' => 500, 'message' =>$password_error];
         }
 
 
         $user_info = User::where(array('email' => $email))->exists();
         if (!$user_info) {
-            return ['code' => 500, 'message' => '未找到该邮箱用户'];
+            return ['code' => 500, 'message' => $email_error];
         }
 
         User::where(array('email' => $email))->update([
             'password' => Hash::make($password)
         ]);
-        return ['code' => 200, 'message' => '修改成功'];
+        return ['code' => 200, 'message' => $login_error];
     }
 }
