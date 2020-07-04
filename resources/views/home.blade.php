@@ -152,72 +152,27 @@
                 <p class="alertTitle yellow">{{$lan==1?'免责声明':'Disclaimer'}}</p>
                 <div class="alertContent">
                     <p class="alertText mb30">
-                        {{$lan==1?'的信息在这个网站的目的是在香港的专业投资者或其等价。它不是为了直接使用任何其他类型的投资者。':"The information in this website is aimed at professional investors in Hong Kong 'or' its equivalence elsewhere. It is not intended for direct use by any other type of investor."}}</p>
-                    <p class="alertText mb30">{{$lan==1?"非机构投资者,一些基金可能投资在新兴市场或特定市场或行业,在高收益债券,这可能包括更高的风险如流动性、交易对手、市场波动和/或浓度的风险。
-投资决策是你的,但你不应该投资于基金,除非中介提供你的基金的基金建议适合你,并解释了为什么,包括投资基金如何将符合您的投资目标。
-投资者不应基于本网站作出任何投资决定。":"For Non-Institutional Investors, some of the Funds may invest in emerging
-                        markets 'or' a specific market 'or' sector and in high yield bonds, which may involve higher risks
-                        such as liquidity, counterparty, market volatility and/'or' concentration risks. The investment
-                        decision is yours but you should not invest in the Fund unless the intermediary which offers you
-                        the Funds has advised you that the Funds are suitable for you and has explained why, including
-                        how investment in the Funds would be consistent with your investment objectives. Investors
-                        should not base on this website alone to make any investment decision."}}</p>
-                    <p class="alertText mb30">{{$lan==1?'过去的表现不能指导未来的投资结果。你的投资的价值和任何所得以及会上涨,也会下跌。
-                    你可能不回到最初投资的全部金额。请注意,与合作伙伴(香港)有限公司,有限公司(“VSPHK”)不建议个人投资者或为个人提供投资建议。':"Past performance is not a guide to future investment results. The value of
-                        your investments and any income derived from them can go down as well as up. You may not get
-                        back the full amount initially invested. Please be aware that VS Partners (Hong Kong) Co.,
-                        Limited (“VSPHK”) does not make recommendations to individual investors 'or' provide investment
-                        advice to individuals."}}</p>
-                    <p class="alertText yellow mb30 bold">{{$lan==1?'请阅读这一重要信息。
-如果您不同意以下部分的任何部分,请不要接受并进入该网站。':"Please read this Important Information. If you do not agree to
-                        any part of the following sections, please do not accept and enter into the website."}}</p>
+                        {{$lan==1?'本网站或微信小程序中涉及的所有信息都仅为服务香港专业投资者或其他地区同等投资者，并不是提供给其他类型投资者直接使用。':"The information in this website 'or' Wechat Mini Programs is aimed at professional investors in Hong Kong 'or' its equivalence elsewhere. It is not intended for direct use by any other type of investor."}}</p>
+                    <p class="alertText mb30">{{$lan==1?"对于非机构投资者，部分投资于新兴市场、特定市场板块、或者高收益债券的资金，将可能涉及流通、交易对手、市场波动、及/或集中风险等高投资风险。如果为您推荐基金的中介已经向您明确解释了这款基金，并且该基金符合您的投资目标，您可以进行投资，但是您不应该投资任何不明确的基金。本网站提供的内容仅供参考，请投资者勿以本网站作为投资依据。":"For Non-Institutional Investors, some of the Funds may invest in emerging markets 'or' a specific market 'or' sector and in high yield bonds, which may involve higher risks such as liquidity, counterparty, market volatility and/'or' concentration risks. The investment decision is yours but you should not invest in the Fund unless the intermediary which offers you the Funds has advised you that the Funds are suitable for you and has explained why, including how investment in the Funds would be consistent with your investment objectives. Investors should not base on this website alone to make any investment decision."}}</p>
+                    <p class="alertText mb30">{{$lan==1?'过去的表现并不能代表未来的投资回报。您的投资价值以及任何投资回报有可能上升或者下降。您也可能无法收回最初投资的全部金额。请注意，维世资产管理（香港）有限公司（下称“维世香港”）不会向任何个人投资者提供投资建议。':"Past performance is not a guide to future investment results. The value of your investments and any income derived from them can go down as well as up. You may not get back the full amount initially invested. Please be aware that VS Partners (Hong Kong) Co., Limited (“VSPHK”) does not make recommendations to individual investors 'or' provide investment advice to individuals. "}}</p>
+                    <p class="alertText yellow mb30 bold">{{$lan==1?'请仔细阅读以下重要条款。如果您对以下条款有任何异议，请勿同意声明和进入网站。':"Please read this Important Information. If you do not agree to any part of the following sections, please do not accept and enter into the website."}}</p>
                     <p class="alertText yellow mb30 bold">{{$lan==1?'网站免责声明':'Website disclaimer'}}</p>
                     <p class="alertText">
-                        <span class="yellow">{{$lan==1?'使用的网站':'Use of Site.'}}</span>{{$lan==1?'本网站提供的信息并非旨在分布,或使用,任何个人或实体在任何管辖或国家,这样的分配或使用违反法律或法规或主题VSPHK,其他子公司,同事或其他子公司在管辖权或任何监管要求的国家。
-任何个人或实体打算回应或依赖本网站的信息必须满足自己,他不受任何本地需求限制或者禁止他这么做。':"The information provided on this site is not intended for distribution to, 'or' use by, any person
-                        'or' entity in any jurisdiction 'or' country where such distribution 'or' use would be contrary to law
-                        'or' regulation 'or' which would subject VSPHK, fellow subsidiaries, associates 'or' other affiliates
-                        to any regulatory requirement within such jurisdiction 'or' country. Any person 'or' entity who
-                        intends to respond to 'or' rely upon the information on this site must satisfy himself that he is
-                        not subject to any local requirement which restricts 'or' prohibits him from doing so."}}
-
+                        <span class="yellow">{{$lan==1?'使用网站':'Use of Site.'}}</span>{{$lan==1?'本网站提供的所有信息，若不能在个别司法管辖区或国家合法分销，或导致维世香港或其母公司或其附属公司或联属公司须遵照该司法管辖区或国家的规定的监管，则网站不提供予该等人士或机构进行使用。任何个人或者公司如要回应或者参考本网站的内容，必须确保自身不受当地任何机关限制或者禁止此行为。':"The information provided on this site is not intended for distribution to, 'or' use by, any person 'or' entity in any jurisdiction 'or' country where such distribution 'or' use would be contrary to law 'or' regulation 'or' which would subject VSPHK, fellow subsidiaries, associates 'or' other affiliates to any regulatory requirement within such jurisdiction 'or' country. Any person 'or' entity who intends to respond to 'or' rely upon the information on this site must satisfy himself that he is not subject to any local requirement which restricts 'or' prohibits him from doing so. "}}
                     </p>
                     <p class="alertText">
-                        <span class="yellow">{{$lan==1?'没有提供':'No Offer.'}}</span>{{$lan==1?'无论是信息还是这个网站中包含的任何观点构成教唆或提供VSPHK购买或出售,是否作为主要或代理,任何证券、期货、期权等金融工具或提供任何投资服务或投资建议。':" Neither the information nor any opinions contained in this site constitutes a solicitation 'or'
-                        offer by VSPHK to buy 'or' sell, whether as principal 'or' agent, any securities, futures, options
-                        'or' other financial instruments 'or' provide any investment service 'or' investment advice."}}
-
+                        <span class="yellow">{{$lan==1?'不提供任何投资建议':'No Offer.'}}</span>{{$lan==1?'维世香港网站上的任何信息或者观点都不构成任何投资买卖的建议。无论是主理人或者其他代理人都不会针对任何证券，期货，期权或者其他金融工具提供投资建议。':" Neither the information nor any opinions contained in this site constitutes a solicitation 'or' offer by VSPHK to buy 'or' sell, whether as principal 'or' agent, any securities, futures, options 'or' other financial instruments 'or' provide any investment service 'or' investment advice."}}
                     </p>
                     <p class="alertText">
-                        <span class="yellow">{{$lan==1?'不保修的':'No Warranty.'}}</span>{{$lan==1?'虽然获得的信息在这个网站或编译来源,我们相信是可靠的,VSPHK不能,不保证准确性、有效性、及时性和完整性的任何此类信息。
-VSPHK明确放弃任何保证适销性或健身的一个特定的目的或职责的护理。
-所有信息在这个网站上提供了“是”,如有更改,恕不另行通知。':"
-                        Although the information on this site is obtained 'or' compiled from sources, we believe to be
-                        reliable, VSPHK cannot and does not warrant the accuracy, validity, timeliness 'or' completeness
-                        of any such information. VSPHK expressly disclaims any warranties of merchantability 'or' fitness
-                        of a particular purpose 'or' duties of care. All information on this site is provided “as is”, and
-                        is subject to change without prior notice."}}
-                    <p class="alertText">{{$lan==1?'责任限制。
-在没有任何事件将VSPHK负责的成员或有任何形式的损害赔偿责任,是否直接、间接、特殊、间接或附带产生的访问或使用,或无法访问或使用本网站或任何与本网站相关的网站或网页,包括(但不限于)造成损害的行为或遗漏任何第三方,即使任何成员VSPHK一直建议的可能性。':"Limitation of Liability. In no event will any member of VSPHK be liable 'or' have
-                        any responsibility for damages of any kind, whether direct, indirect, special, consequential 'or'
-                        incidental, resulting from access 'or' use of, 'or' inability to access 'or' use, this site 'or' any
-                        sites 'or' pages linked to this site, including (without limitation) damages resulting from the
-                        act 'or' omission of any third party, even if any member of VSPHK has been advised of the
-                        possibility thereof. "}}</p>
+                        <span class="yellow">{{$lan==1?'不提供保证':'No Warranty.'}}</span>{{$lan==1?'虽然本网站提供予阁下的信息均来自我们认为可靠的来源资料，但是维世香港不能亦不会就任何内容的准确性，有效性，及时性或者完整性做出任何保证。维世香港明确否认对于任何适销性或者某一特定用途的适用性的担保。本网站上的内容仅按当时情况提供，如有任何变更，恕不预先通知。':"Although the information on this site is obtained 'or' compiled from sources, we believe to be reliable, VSPHK cannot and does not warrant the accuracy, validity, timeliness 'or' completeness of any such information. VSPHK expressly disclaims any warranties of merchantability 'or' fitness of a particular purpose 'or' duties of care. All information on this site is provided “as is”, and is subject to change without prior notice. "}}
+                    <p class="alertText">
+                        <span class="yellow">{{$lan==1?'责任限制。':'Limitation of Liability. '}}</span>{{$lan==1?'在任何情况下，维世香港的任何成员都不会对导致阁下不能访问或者使用网站及其他页面上的网站链接而导致的任何直接、间接、特殊、惩罚性、或者意外性损失，承担任何责任。此等损失包括由任何第三章提及的行为或者疏忽所导致，即使维世香港任何成员事先获悉有招致此等损失的可能。':"In no event will any member of VSPHK be liable 'or' have any responsibility for damages of any kind, whether direct, indirect, special, consequential 'or' incidental, resulting from access 'or' use of, 'or' inability to access 'or' use, this site 'or' any sites 'or' pages linked to this site, including (without limitation) damages resulting from the act 'or' omission of any third party, even if any member of VSPHK has been advised of the possibility thereof. "}}</p>
                     </p>
                     <p class="alertText">
-                        <span class="yellow">{{$lan==1?'版权':'Copyright.'}}</span>{{$lan==1?'这个网站上的信息可能不是复制,分发或发表在任何媒介为任何目的从VSPHK没有事先书面同意。
-如果你从本网站下载任何资料或软件,你同意不会复制或删除或掩盖任何版权或其他通知或传说中包含任何此类信息和引用的信息来源”在自己的材料。':"The information on this site may not be reproduced. distributed 'or' published in any medium for
-                        any purpose without prior express written consent from VSPHK. If you download any information 'or'
-                        software from this site. you agree that you will not copy it 'or' remove 'or' obscure any copyright
-                        'or' other notices 'or' legends contained in any such information and quote “source of information”
-                        in your own materials."}}
-
+                        <span class="yellow">{{$lan==1?'版权。':'Copyright.'}}</span>{{$lan==1?'未经维世香港事先书面同意，不得以任何形式和目的修改、复制、传播和发布本网站上的任何内容。如果阁下由本网址下载任何信息或软件，即表示阁下同意不会复制该等资料或软件，或除去、隐藏该等数据所载的任何版权或其它通告或标题，并且在你的材料中引用信息来源。':"The information on this site may not be reproduced, distributed 'or' published in any medium for any purpose without prior express written consent from VSPHK. If you download any information 'or' software from this site, you agree that you will not copy it 'or' remove 'or' obscure any copyright 'or' other notices 'or' legends contained in any such information and quote “source of information” in your own materials. "}}
                     </p>
                     <p class="alertText">
-                        <span class="yellow">{{$lan==1?'重要的':'Important.'}}</span>{{$lan==1?'通过访问本网站和它的任何页面你同意上面的条款和条件。':" By accessing this site and any of its pages you are agreeing the terms and conditions set out
-                        above."}}
-
+                        <span class="yellow">{{$lan==1?'重要事项。':'Important.'}}</span>{{$lan==1?'阁下于浏览本网站的任何内页，即表示阁下同意上述的合约条款。':"By accessing this site and any of its pages you are agreeing the terms and conditions set out above."}}
                     </p>
                 </div>
                 <div class="alertBtns">
